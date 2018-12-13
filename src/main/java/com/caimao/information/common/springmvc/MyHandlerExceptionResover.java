@@ -3,6 +3,7 @@ package com.caimao.information.common.springmvc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,10 +16,11 @@ import java.io.IOException;
 
 /**
  * @className:MyHandlerExceptionResover.java
- * @classDescription: 错误处理类 并记录logger
+ * @classDescription: 全局的异常处理 并记录logger
  * @author:genx
  * @createTime:2017年5月25日 下午3:36:41
  */
+@Component
 public class MyHandlerExceptionResover implements HandlerExceptionResolver {
     private static Logger logger = LoggerFactory.getLogger(MyHandlerExceptionResover.class);
 

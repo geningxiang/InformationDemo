@@ -7,5 +7,5 @@ package com.caimao.information.entity;
  * @author: genx
  * @date: 2018/12/13 16:58
  */
-public class Sort {
+public class ArticleEntity {
 }

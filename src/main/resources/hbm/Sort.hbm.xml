@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.caimao.information.entity.SortEntity" table="SORT" dynamic-update="true" dynamic-insert="true">
+        <id name="id" unsaved-value="0">
+            <column name="ID"/>
+            <generator class="identity"/>
+        </id>
+        <property column="SORT_NAME" name="sortName"/>
+        <property column="ORDER_NUM" name="orderNum"/>
+    </class>
+</hibernate-mapping>

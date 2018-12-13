@@ -3,46 +3,47 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                         http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
                          http://www.springframework.org/schema/context
                         http://www.springframework.org/schema/context/spring-context-3.2.xsd
                         http://www.springframework.org/schema/mvc
-                        http://www.springframework.org/schema/mvc/spring-mvc.xsd
-                        http://www.springframework.org/schema/task
-                        http://www.springframework.org/schema/task/spring-task-3.1.xsd"
-       default-autowire="byName" >
-    <!--启用spring的一些annotation -->
-    <context:annotation-config/>
+                        http://www.springframework.org/schema/mvc/spring-mvc.xsd"
+       default-autowire="byName">
 
-    <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
-    <context:component-scan base-package="com.caimao.information.controller"/>
 
-    <!-- 全局异常处理类 -->
-    <bean class="com.caimao.information.common.springmvc.MyHandlerExceptionResover"></bean>
+    <context:component-scan base-package="com.caimao.information"/>
 
-    <!-- 配置注解驱动 可以将request参数与绑定到controller参数上 -->
-    <mvc:annotation-driven/>
+    <!-- 添加默认的拦截器 -->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <!-- 配置Fastjson支持 自动将对象 转为 json格式 -->
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=UTF-8</value>
+                        <value>application/json</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
 
-    <!-- 配置静态文件拦截器，防止SpringMVC拦截静态文件资源的访问
-    <mvc:default-servlet-handler/>
-     -->
+    </mvc:annotation-driven>
 
-    <!-- 拦截器 -->
-    <!-- 暂时注释掉，方便后期测试 -->
-    <!--<mvc:interceptors>
+    <!-- 自定义拦截器 -->
+    <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/admin/**"/>  &lt;!&ndash; 定义哪些要拦截 &ndash;&gt;
-            <bean class="com.caimao.stockquotation.interceptor.AdminInterceptor"/>
+            <mvc:mapping path="/**"/>
+            <bean class="com.caimao.information.interceptor.MyInterceptor"/>
         </mvc:interceptor>
-    </mvc:interceptors>-->
+    </mvc:interceptors>
 
     <!-- 对模型视图名称的解析，即在模型视图名称添加前后缀(如果最后一个还是表示文件夹,则最后的斜杠不要漏了) 使用JSP-->
     <!-- 默认的视图解析器 在上边的解析错误时使用 (默认使用html)- -->
     <bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
-        <property name="prefix" value="/WEB-INF/page/"/><!--设置JSP文件的目录位置-->
+        <!--设置JSP文件的目录位置-->
+        <property name="prefix" value="/WEB-INF/page/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
