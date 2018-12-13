@@ -17,7 +17,7 @@ import java.util.List;
  * @author: genx
  * @date: 2018/12/14 0:19
  */
-@RestController     //相当于 @Controller + 每个方法 @ResponseBody
+@RestController
 @RequestMapping("/")
 public class SortController {
 

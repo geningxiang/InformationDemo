@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 翻页包装类
+ * Created with IntelliJ IDEA.
+ * Description: 翻页包装类
  *
+ * @author: genx
+ * @date: 2018/12/13 22:43
  */
 public class Pager<T> {
     /**
@@ -75,7 +78,8 @@ public class Pager<T> {
 
     public int getPageCount() {
         int num = total / pageSize + (total % pageSize == 0 ? 0 : 1);
-        return total == 0 ? 1 : num;// 判断没有记录的时候
+        // 判断没有记录的时候
+        return total == 0 ? 1 : num;
     }
 
     public int getPageNo() {

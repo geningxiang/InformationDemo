@@ -3,7 +3,7 @@ package com.caimao.information.common.hibernate;
 import com.caimao.information.common.Pager;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.LockMode;
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.util.Assert;
 
@@ -59,10 +59,9 @@ public class BaseDAO<T, PK extends Serializable> extends HibernateDaoSupport {
     }
 
     public List<T> findAll() {
-        StringBuffer hql = new StringBuffer(1000);
-        hql.append("from ");
-        hql.append(entityClass.getName());
-        return (List<T>) getHibernateTemplate().find(hql.toString());
+        return getHibernateTemplate().execute(session -> {
+            return session.createQuery("from" + entityClass.getName()).list();
+        });
     }
 
     public Pager getListPage(String hql, List<Object> pars, String orderBy, int pageNo, int pageSize) {
@@ -105,12 +104,16 @@ public class BaseDAO<T, PK extends Serializable> extends HibernateDaoSupport {
         return list;
     }
 
-    public List getList(String hql, List paramValue){
-        Object[] params = null;
-        if(paramValue != null) {
-            params = paramValue.toArray(new Object[paramValue.size()]);
-        }
-        return this.getHibernateTemplate().find(hql, params);
+    public List getList(String hql, List params){
+        return getHibernateTemplate().execute(session -> {
+            Query query = session.createQuery(hql);
+            if (params != null && params.size() > 0) {
+                for (int i = 0; i < params.size(); i++) {
+                    query.setParameter(i, params.get(i));
+                }
+            }
+            return query.list();
+        });
     }
 
     public List getList(String hql){

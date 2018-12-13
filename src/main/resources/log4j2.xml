@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration status="error">
     <Properties>
-        <Property name="fileName">front.log</Property>
-        <Property name="backupFilePatch">./log/</Property>
+        <Property name="fileName">log4j2.log</Property>
+        <Property name="backupFilePatch">./logs/</Property>
     </Properties>
     <!--先定义所有的appender-->
     <appenders>
@@ -17,7 +17,7 @@
         <!--这个会打印出所有的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档-->
         <RollingFile name="RollingFile" fileName="${backupFilePatch}${fileName}"
                      filePattern="${backupFilePatch}$${date:yyyy-MM}/app-%d{yyyyMMddHHmmssSSS}.log.gz">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <PatternLayout pattern="%d [%level] %class#%M(%L) - %msg%xEx%n"/>
 
             <!-- 日志文件大小 -->
             <SizeBasedTriggeringPolicy size="20MB" />

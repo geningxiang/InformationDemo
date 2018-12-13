@@ -1,20 +1,17 @@
 package com.caimao.information.controller;
 
 import com.caimao.information.entity.SortEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created with IntelliJ IDEA.
  * Description:
- *
+ *  RestController == @Controller + 每个方法 @ResponseBody
  * @author: genx
  * @date: 2018/12/13 17:25
  */
-
-@RestController     //相当于 @Controller + 每个方法 @ResponseBody
+@RestController
 @RequestMapping("/index")
 public class IndexController {
 
