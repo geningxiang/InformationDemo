@@ -1,5 +1,6 @@
 package com.caimao.information.controller;
 
+import com.caimao.information.common.ResponseEntity;
 import com.caimao.information.entity.SortEntity;
 import com.caimao.information.service.ISortService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,9 @@ public class SortController {
     private ISortService sortService;
 
     @RequestMapping("/sorts")
-    public List<SortEntity> sorts() {
+    public ResponseEntity<List<SortEntity>> sorts() {
         List<SortEntity> list = sortService.getList();
-        return list;
+        return ResponseEntity.ok(list);
     }
 
     @RequestMapping(value="/sort/{id}",method= RequestMethod.GET)
