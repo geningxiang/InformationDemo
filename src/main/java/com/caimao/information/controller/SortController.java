@@ -3,6 +3,7 @@ package com.caimao.information.controller;
 import com.caimao.information.entity.SortEntity;
 import com.caimao.information.service.ISortService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,8 +42,13 @@ public class SortController {
 
     @RequestMapping(value="/sort",method=RequestMethod.POST)
     public SortEntity post(SortEntity sortEntity){
-
-        return null;
+        Assert.notNull(sortEntity, "参数为空");
+        Assert.hasText(sortEntity.getSortName(), "栏位名称不能为空");
+        if(sortEntity.getOrderNum() == null) {
+            sortEntity.setOrderNum(999);
+        }
+        sortService.save(sortEntity);
+        return sortEntity;
     }
 
     @RequestMapping(value="/sort/{id}",method=RequestMethod.PUT)
