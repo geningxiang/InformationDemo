@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.caimao.information.entity.ArticleEntity" table="ARTICLE">
+        <id name="id" column="ID" unsaved-value="0">
+            <generator class="identity"/>
+        </id>
+        <property name="sortId" column="SORT_ID"/>
+        <property name="userId" column="USER_ID"/>
+        <property name="upNum" column="UP_NUM"/>
+        <property name="commentNum" column="COMMENT_NUM"/>
+        <property name="onTop" column="ON_TOP"/>
+        <property name="status" column="STATUS"/>
+        <property name="postTime" column="POST_TIME"/>
+        <property name="title" column="TITLE"/>
+        <property name="intro" column="INTRO"/>
+    </class>
+</hibernate-mapping>

@@ -31,9 +31,9 @@ public class SortServiceImplTest {
     @Test
     public void save() {
         SortEntity sortEntity = new SortEntity();
-//        sortEntity.setSortName("热门");
-//        sortEntity.setOrderNum(1);
-//        sortService.save(sortEntity);
+        sortEntity.setSortName("热门");
+        sortEntity.setOrderNum(1);
+        sortService.save(sortEntity);
 
         sortEntity = new SortEntity();
         sortEntity.setSortName("社会");
