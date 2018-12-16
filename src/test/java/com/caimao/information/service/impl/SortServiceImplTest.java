@@ -35,30 +35,30 @@ public class SortServiceImplTest {
         sortEntity.setOrderNum(1);
         sortService.save(sortEntity);
 
-        sortEntity = new SortEntity();
-        sortEntity.setSortName("社会");
-        sortEntity.setOrderNum(2);
-        sortService.save(sortEntity);
-
-        sortEntity = new SortEntity();
-        sortEntity.setSortName("体育");
-        sortEntity.setOrderNum(3);
-        sortService.save(sortEntity);
-
-        sortEntity = new SortEntity();
-        sortEntity.setSortName("财经");
-        sortEntity.setOrderNum(4);
-        sortService.save(sortEntity);
-
-        sortEntity = new SortEntity();
-        sortEntity.setSortName("娱乐");
-        sortEntity.setOrderNum(5);
-        sortService.save(sortEntity);
-
-        sortEntity = new SortEntity();
-        sortEntity.setSortName("理财");
-        sortEntity.setOrderNum(6);
-        sortService.save(sortEntity);
+//        sortEntity = new SortEntity();
+//        sortEntity.setSortName("社会");
+//        sortEntity.setOrderNum(2);
+//        sortService.save(sortEntity);
+//
+//        sortEntity = new SortEntity();
+//        sortEntity.setSortName("体育");
+//        sortEntity.setOrderNum(3);
+//        sortService.save(sortEntity);
+//
+//        sortEntity = new SortEntity();
+//        sortEntity.setSortName("财经");
+//        sortEntity.setOrderNum(4);
+//        sortService.save(sortEntity);
+//
+//        sortEntity = new SortEntity();
+//        sortEntity.setSortName("娱乐");
+//        sortEntity.setOrderNum(5);
+//        sortService.save(sortEntity);
+//
+//        sortEntity = new SortEntity();
+//        sortEntity.setSortName("理财");
+//        sortEntity.setOrderNum(6);
+//        sortService.save(sortEntity);
     }
 
     @Test

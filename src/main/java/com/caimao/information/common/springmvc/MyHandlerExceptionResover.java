@@ -1,5 +1,6 @@
 package com.caimao.information.common.springmvc;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -35,7 +36,7 @@ public class MyHandlerExceptionResover implements HandlerExceptionResolver {
                 response.sendError(500, "上传文件超出最大限制");
 
             } else if (ex instanceof IllegalArgumentException) {
-                response.sendError(500, "参数错误");
+                response.sendError(500, StringUtils.isNotEmpty(ex.getMessage()) ? ex.getMessage() : "参数错误");
             } else {
                 response.sendError(500, "内部错误");
             }

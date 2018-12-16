@@ -4,6 +4,7 @@ import com.caimao.information.common.ResponseEntity;
 import com.caimao.information.entity.SortEntity;
 import com.caimao.information.service.ISortService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,30 +32,42 @@ public class SortController {
         return ResponseEntity.ok(list);
     }
 
-    @RequestMapping(value="/sort/{id}",method= RequestMethod.GET)
-    public SortEntity get(@PathVariable("id") Integer id){
+    @RequestMapping(value = "/sort/{id}", method = RequestMethod.GET)
+    public SortEntity get(@PathVariable("id") Integer id) {
         SortEntity sortEntity = null;
-        if(id != null) {
+        if (id != null) {
             sortEntity = sortService.getModel(id);
         }
         return sortEntity;
     }
 
-    @RequestMapping(value="/sort",method=RequestMethod.POST)
-    public SortEntity post(SortEntity sortEntity){
-
-        return null;
+    @RequestMapping(value = "/sort", method = RequestMethod.POST)
+    public ResponseEntity<SortEntity> save(SortEntity sortEntity) {
+        Assert.isNull(sortEntity.getId(), "参数错误");
+        Assert.hasText(sortEntity.getSortName(), "请输入栏位名称");
+        if (sortEntity.getOrderNum() == null) {
+            sortEntity.setOrderNum(999);
+        }
+        sortService.save(sortEntity);
+        return ResponseEntity.ok(sortEntity);
     }
 
-    @RequestMapping(value="/sort/{id}",method=RequestMethod.PUT)
-    public SortEntity put(@PathVariable("id") Integer id){
-        System.out.println("put"+id);
-        return null;
+    @RequestMapping(value = "/sort/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<SortEntity> put(@PathVariable("id") Integer id, SortEntity sortEntity) {
+        Assert.notNull(id, "参数错误");
+        sortEntity.setId(id);
+        Assert.hasText(sortEntity.getSortName(), "请输入栏位名称");
+        if (sortEntity.getOrderNum() == null) {
+            sortEntity.setOrderNum(999);
+        }
+        sortService.update(sortEntity);
+        return ResponseEntity.ok(sortEntity);
     }
 
-    @RequestMapping(value="/sort/{id}",method=RequestMethod.DELETE)
-    public String delete(@PathVariable("id") Integer id){
-        System.out.println("delete"+id);
-        return "1";
+    @RequestMapping(value = "/sort/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity delete(@PathVariable("id") Integer id) {
+        Assert.notNull(id, "参数错误");
+        sortService.deleteById(id);
+        return ResponseEntity.ok(null);
     }
 }

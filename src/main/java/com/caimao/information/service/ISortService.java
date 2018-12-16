@@ -14,6 +14,7 @@ import java.util.List;
 public interface ISortService {
     /**
      * 根据ID查询栏位对象
+     *
      * @param id
      * @return
      */
@@ -21,24 +22,28 @@ public interface ISortService {
 
     /**
      * 保存
+     *
      * @param model
      */
     void save(SortEntity model);
 
     /**
      * 更新
+     *
      * @param model
      */
     void update(SortEntity model);
 
     /**
      * 删除
+     *
      * @param id
      */
     void deleteById(int id);
 
     /**
      * 获取全部列表
+     *
      * @return
      */
     List<SortEntity> getList();

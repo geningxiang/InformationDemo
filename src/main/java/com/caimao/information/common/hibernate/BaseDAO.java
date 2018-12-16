@@ -60,7 +60,7 @@ public class BaseDAO<T, PK extends Serializable> extends HibernateDaoSupport {
 
     public List<T> findAll() {
         return getHibernateTemplate().execute(session -> {
-            return session.createQuery("from" + entityClass.getName()).list();
+            return session.createQuery("from " + entityClass.getName()).list();
         });
     }
 
