@@ -1,5 +1,7 @@
 package com.caimao.information.common;
 
+import org.springframework.http.HttpStatus;
+
 /**
  * Created with IntelliJ IDEA.
  * Description:
@@ -13,7 +15,7 @@ public class ResponseEntity<T> {
     private T data;
     private long timestamp;
 
-    private ResponseEntity(ResponseStatus status, String msg, T data){
+    private ResponseEntity(HttpStatus status, String msg, T data) {
         this.status = status.value();
         this.msg = msg;
         this.data = data;
@@ -21,10 +23,10 @@ public class ResponseEntity<T> {
     }
 
     public static <T> ResponseEntity<T> ok(T data) {
-        return new ResponseEntity(ResponseStatus.OK,"", data);
+        return new ResponseEntity(HttpStatus.OK, "", data);
     }
 
-    public static <T> ResponseEntity<T> of(ResponseStatus status, String msg, T data) {
+    public static <T> ResponseEntity<T> of(HttpStatus status, String msg, T data) {
         return new ResponseEntity(status, msg, data);
     }
 
