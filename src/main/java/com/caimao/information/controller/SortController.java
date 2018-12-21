@@ -1,11 +1,11 @@
 package com.caimao.information.controller;
 
 import com.caimao.information.common.ResponseEntity;
-import com.caimao.information.common.ResponseStatus;
 import com.caimao.information.entity.SortEntity;
 import com.caimao.information.service.ISortService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,7 +63,7 @@ public class SortController {
     @RequestMapping(value="/sort/{id}", method= RequestMethod.PUT)
     public ResponseEntity<SortEntity> update(@PathVariable("id") Integer id, SortEntity model){
         if(id == null || model == null || StringUtils.isEmpty(model.getSortName())){
-            return ResponseEntity.of(ResponseStatus.BAD_REQUEST, "参数错误", null);
+            return ResponseEntity.of(HttpStatus.BAD_REQUEST, "参数错误", null);
         }
         model.setId(id);
         if(model.getOrderNum() == null) {
@@ -76,7 +76,7 @@ public class SortController {
     @RequestMapping(value="/sort/{id}", method= RequestMethod.DELETE)
     public ResponseEntity delete(@PathVariable("id") Integer id){
         if(id == null){
-            return ResponseEntity.of(ResponseStatus.BAD_REQUEST, "参数错误", null);
+            return ResponseEntity.of(HttpStatus.BAD_REQUEST, "参数错误", null);
         }
         sortService.deleteById(id);
         return ResponseEntity.ok(null);
