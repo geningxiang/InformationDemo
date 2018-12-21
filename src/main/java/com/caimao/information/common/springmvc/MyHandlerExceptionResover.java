@@ -34,15 +34,6 @@ public class MyHandlerExceptionResover implements HandlerExceptionResolver {
     @Override
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
 
-
-        if (handler.getClass().isAssignableFrom(HandlerMethod.class)) {
-            if (((HandlerMethod) handler).hasMethodAnnotation(ResponseBody.class)) {
-                logger.debug("方法中包含@ResponseBody");
-            } else if (((HandlerMethod) handler).getBeanType().isAnnotationPresent(RestController.class)) {
-                logger.debug("Controller包含@RestController");
-            }
-        }
-
         //把异常信息记入日志
         logger.error("拦截器捕获异常", ex);
         ResponseEntity responseEntity = null;

@@ -29,6 +29,16 @@
         <listener-class>com.caimao.information.listener.MyServletRequestListener</listener-class>
     </listener>
 
+    <!--
+    <filter>
+        <filter-name>HttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HttpMethodFilter</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+    -->
 
     <filter>
         <filter-name>myFilter1</filter-name>
@@ -40,7 +50,7 @@
     </filter>
     <filter-mapping>
         <filter-name>myFilter1</filter-name>
-        <url-pattern>*.do</url-pattern>
+        <url-pattern>/api/*</url-pattern>
     </filter-mapping>
 
     <filter>
@@ -53,7 +63,7 @@
     </filter>
     <filter-mapping>
         <filter-name>myFilter2</filter-name>
-        <url-pattern>*.do</url-pattern>
+        <url-pattern>/api/*</url-pattern>
     </filter-mapping>
 
 
@@ -68,7 +78,7 @@
     </filter>
     <filter-mapping>
         <filter-name>characterEncodingFilter</filter-name>
-        <url-pattern>*.do</url-pattern>
+        <url-pattern>/api/*</url-pattern>
     </filter-mapping>
 
     <!-- 添加 SpringMVC -->
@@ -88,13 +98,10 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>springDispatcherServlet</servlet-name>
-        <url-pattern>*.do</url-pattern>
+        <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
 
-
-
-
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 </web-app>

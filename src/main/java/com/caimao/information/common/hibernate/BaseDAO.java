@@ -55,7 +55,9 @@ public class BaseDAO<T, PK extends Serializable> extends HibernateDaoSupport {
     public void deleteById(PK id) {
         Assert.notNull(id, "id is required");
         T t = getHibernateTemplate().load(entityClass, id);
-        getHibernateTemplate().delete(t);
+        if(t != null) {
+            getHibernateTemplate().delete(t);
+        }
     }
 
     public List<T> findAll() {

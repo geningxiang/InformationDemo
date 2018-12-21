@@ -12,7 +12,7 @@
        default-autowire="byName">
 
 
-    <context:component-scan base-package="com.caimao.information"/>
+    <context:component-scan base-package="com.caimao.information.controller"/>
 
     <!-- 添加默认的拦截器 -->
     <mvc:annotation-driven>
@@ -21,8 +21,10 @@
             <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
                 <property name="supportedMediaTypes">
                     <list>
-                        <value>text/html;charset=UTF-8</value>
+
                         <value>application/json</value>
+
+                        <value>text/html;charset=UTF-8</value>
                     </list>
                 </property>
             </bean>

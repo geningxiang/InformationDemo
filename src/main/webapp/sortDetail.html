@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>栏位详情</title>
+    <link href="https://cdn.bootcss.com/picnic/6.5.0/picnic.min.css" rel="stylesheet">
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            padding: 10px;
+        }
+        table{
+            width: 100%;
+        }
+        .btnBox{
+            padding-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<form id="myForm" action="">
+<div id="sortDetailContent"></div>
+</form>
+
+
+<script id="sortTemplate" type="text/html">
+    <table>
+        {{ if id }}
+        <tr>
+            <td>ID</td>
+            <td>{{id}}<input type="hidden" name="id" value="{{id}}"></td>
+        </tr>
+        {{ /if }}
+        <tr>
+            <td>栏位名称</td>
+            <td>
+                <input name="sortName" value="{{sortName}}">
+            </td>
+        </tr>
+        <tr>
+            <td>排序值</td>
+            <td>
+                <input type="number" name="orderNum" value="{{orderNum}}">
+            </td>
+        </tr>
+    </table>
+    <div class="btnBox">
+        {{ if id }}
+        <button type="button" onclick="sortUpdate('{{id}}')">修改</button>
+        {{ else }}
+        <button type="button" onclick="sortAdd()">新增</button>
+        {{ /if }}
+    </div>
+</script>
+
+<script src="/resources/lib/jquery3.3.1.min.js"></script>
+<script src="/resources/lib/template-web.js"></script>
+
+<script>
+    var getParam = function (param) {
+        var g = new RegExp("(\\?|#|&)" + param + "=([^&#]*)(&|#|$)");
+        var d = location.href.match(g);
+        return d ? d[2] || "" : "";
+    }
+
+    var querySort = function(){
+        var id = getParam("id");
+        if(id && id > 0){
+            $.get("/api/sort/" + id, function(data){
+                console.log('查询栏位', data);
+                if(data.status == 200){
+                    $("#sortDetailContent").html(template("sortTemplate", data.data));
+                } else{
+                    alert(data.msg);
+                }
+            });
+        } else{
+            //新增
+            $("#sortDetailContent").html(template("sortTemplate", {}));
+        }
+
+    }
+
+    $(function(){
+        querySort();
+    });
+
+    function sortAdd(){
+        $.ajax({
+            type: "POST",
+            url: "/api/sort",
+            data: $("#myForm").serializeArray(),
+            dataType: "json",
+            success: function(data){
+                console.log('新增结果', data);
+                if(data.status == 200){
+                    alert('新增成功');
+
+                    //调用父窗口方法
+                    window.opener && window.opener.query();
+
+                    window.close();
+                } else {
+                    alert(data.msg);
+                }
+            },
+            error: function(){
+                alert("请求失败");
+            }
+        });
+    }
+
+    function sortUpdate(id){
+        $.ajax({
+            type: "PUT",
+            url: "/api/sort/" + (id || ''),
+            data: $("#myForm").serializeArray(),
+            dataType: "json",
+            success: function(data){
+                console.log('修改结果', data);
+                if(data.status == 200){
+                    alert('修改成功');
+
+                    //调用父窗口方法
+                    window.opener && window.opener.query();
+
+                    window.close();
+                } else {
+                    alert(data.msg);
+                }
+            },
+            error: function(){
+                alert("请求失败");
+            }
+        });
+    }
+</script>
+</body>
+</html>

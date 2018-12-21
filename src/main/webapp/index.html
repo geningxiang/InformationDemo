@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>增删改查Demo</title>
+    <link href="https://cdn.bootcss.com/picnic/6.5.0/picnic.min.css" rel="stylesheet">
+<style>
+
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        padding: 10px;
+    }
+    table{
+        width: 100%;
+    }
+</style>
+</head>
+<body>
+
+        <h1>列表</h1>
+        <div id="sortListContent"></div>
+
+
+<script id="sortListTemplate" type="text/html">
+<table>
+    <tr>
+        <th>ID</th>
+        <th>栏位名称</th>
+        <th>排序值</th>
+        <th>操作</th>
+    </tr>
+    {{each data item i}}
+    <tr>
+        <td>{{item.id}}</td>
+        <td>{{item.sortName}}</td>
+        <td>{{item.orderNum}}</td>
+        <td>
+            <button onclick="sortDelete('{{item.id}}');">删除</button>
+            <button onclick="sortEdit('{{item.id}}');">修改</button>
+        </td>
+    </tr>
+    {{/each}}
+</table>
+</script>
+
+<script src="/resources/lib/jquery3.3.1.min.js"></script>
+<script src="/resources/lib/template-web.js"></script>
+
+<script>
+
+
+    var query = function(){
+        $("#sortListContent").html('');
+        $.get("/api/sorts", function(data){
+           console.log('查询栏位列表', data);
+           if(data.status == 200){
+                $("#sortListContent").html(template("sortListTemplate", data));
+           }
+        });
+    }
+
+    $(function(){
+        query();
+    });
+
+    function sortDelete(id){
+        if(confirm("确定要删除这条栏位吗?")){
+            $.ajax({
+                type: "DELETE",
+                url: "/api/sort/" + id,
+                dataType: "json",
+                success: function(data){
+                    console.log('删除结果', data);
+                    if(data.status == 200){
+                        alert('删除成功');
+                        query();
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error: function(){
+                    alert("请求失败");
+                }
+            });
+
+        }
+    }
+
+    function sortEdit(id){
+        window.open('/sortDetail.html?id=' + (id || ''));
+    }
+</script>
+</body>
+</html>

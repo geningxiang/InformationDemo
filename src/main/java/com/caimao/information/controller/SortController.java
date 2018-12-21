@@ -7,10 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,23 +32,27 @@ public class SortController {
     }
 
     @RequestMapping(value="/sort/{id}",method= RequestMethod.GET)
-    public SortEntity get(@PathVariable("id") Integer id){
+    public ResponseEntity<SortEntity> get(@PathVariable("id") Integer id){
         SortEntity sortEntity = null;
         if(id != null) {
             sortEntity = sortService.getModel(id);
         }
-        return sortEntity;
+        if(sortEntity != null) {
+            return ResponseEntity.ok(sortEntity);
+        } else {
+            return ResponseEntity.of(HttpStatus.NOT_FOUND, "未找到相应栏位", null);
+        }
     }
 
     @RequestMapping(value="/sort",method=RequestMethod.POST)
-    public SortEntity post(SortEntity sortEntity){
+    public ResponseEntity<SortEntity> post(SortEntity sortEntity){
         Assert.notNull(sortEntity, "参数为空");
         Assert.hasText(sortEntity.getSortName(), "栏位名称不能为空");
         if(sortEntity.getOrderNum() == null) {
             sortEntity.setOrderNum(999);
         }
         sortService.save(sortEntity);
-        return sortEntity;
+        return ResponseEntity.ok(sortEntity);
     }
 
 
@@ -61,7 +62,7 @@ public class SortController {
      * @return
      */
     @RequestMapping(value="/sort/{id}", method= RequestMethod.PUT)
-    public ResponseEntity<SortEntity> update(@PathVariable("id") Integer id, SortEntity model){
+    public ResponseEntity<SortEntity> update(@PathVariable("id") Integer id,  SortEntity model){
         if(id == null || model == null || StringUtils.isEmpty(model.getSortName())){
             return ResponseEntity.of(HttpStatus.BAD_REQUEST, "参数错误", null);
         }

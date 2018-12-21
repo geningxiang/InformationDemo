@@ -67,5 +67,6 @@ public class SortServiceImplTest {
 
     @Test
     public void deleteById() {
+        sortService.deleteById(7);
     }
 }
