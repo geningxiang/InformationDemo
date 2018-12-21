@@ -24,7 +24,7 @@ public class MyInterceptor implements HandlerInterceptor {
      */
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object arg2, Exception arg3) throws Exception {
-
+        logger.debug("afterCompletion");
     }
 
     /**
@@ -32,7 +32,7 @@ public class MyInterceptor implements HandlerInterceptor {
      */
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object arg2, ModelAndView arg3) throws Exception {
-
+        logger.debug("postHandle");
     }
 
     /**
@@ -42,7 +42,9 @@ public class MyInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
+        logger.debug("preHandle");
+//        int a = 1, b =0;
+//        int c = a / b;
         if (handler.getClass().isAssignableFrom(HandlerMethod.class)) {
             logger.info("【当前请求地址】{}", request.getRequestURI());
             //TODO 权限控制
