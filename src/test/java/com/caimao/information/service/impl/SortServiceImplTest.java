@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  * @date: 2018/12/14 0:02
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:/spring/*.xml", "classpath:/spring-mvc.xml"})
+@ContextConfiguration({"classpath:/spring/*.xml"})
 public class SortServiceImplTest {
 
     @Autowired

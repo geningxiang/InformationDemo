@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.caimao.information.entity.StudentJobEntity" table="STUDENT_JOB" schema="information">
+        <id name="studentId" column="STUDENT_ID"/>
+        <property name="articleListMd5" column="ARTICLE_LIST_MD5"/>
+        <property name="articleListSorts" column="ARTICLE_LIST_SORTS"/>
+        <property name="articleListData" column="ARTICLE_LIST_DATA"/>
+        <property name="articleListEvent" column="ARTICLE_LIST_EVENT"/>
+    </class>
+</hibernate-mapping>
