@@ -21,5 +21,5 @@ public interface IStudentJobService {
 
     void deleteById(String id);
 
-    List<SortEntity> getList();
+    List<StudentJobEntity> getList();
 }

@@ -50,7 +50,7 @@ public class StudentJobServiceImpl implements IStudentJobService {
     }
 
     @Override
-    public List<SortEntity> getList() {
+    public List<StudentJobEntity> getList() {
         String hql = "from StudentJobEntity order by studentId";
         return studentJobDAO.getList(hql);
     }

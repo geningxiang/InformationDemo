@@ -35,7 +35,7 @@
         <logger name="com.alibaba.druid" level="warn"/>
 
         <!--建立一个默认的root的logger-->
-        <Root level="warn">
+        <Root level="info">
             <AppenderRef ref="Console"/>
         </Root>
     </loggers>
