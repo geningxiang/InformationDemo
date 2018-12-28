@@ -66,7 +66,7 @@ public class StudentJobServiceImplTest {
             sb.append("<tr>");
 
             sb.append("<td>").append(model.getStudentId()).append("</td>");
-            if(StringUtils.isNotEmpty(model.getArticleListMd5())) {
+            if (StringUtils.isNotEmpty(model.getArticleListMd5())) {
                 sb.append("<td>").append("<a href=\"/").append(model.getStudentId()).append("/articleList.html\" target=\"_blank\">点击跳转</a>").append("</td>");
                 sb.append("<td>").append(model.getArticleListData().multiply(new BigDecimal("100")).doubleValue()).append("%</td>");
                 sb.append("<td>").append(model.getArticleListSortEvent().intValue() == 1 ? "有" : "无").append("</td>");
@@ -76,14 +76,14 @@ public class StudentJobServiceImplTest {
             }
 
 
-            if(StringUtils.isNotEmpty(model.getArticleDetailMd5())) {
+            if (StringUtils.isNotEmpty(model.getArticleDetailMd5())) {
                 sb.append("<td>").append("<a href=\"/").append(model.getStudentId()).append("/articleDetail.html?id=78345\" target=\"_blank\">点击跳转</a>").append("</td>");
                 sb.append("<td>").append(model.getArticleDetailData().intValue() == 1 ? "准确" : "不准确").append("</td>");
             } else {
                 sb.append("<td>-</td><td>-</td>");
             }
 
-            if(StringUtils.isNotEmpty(model.getMatchListMd5())) {
+            if (StringUtils.isNotEmpty(model.getMatchListMd5())) {
                 sb.append("<td>").append("<a href=\"/").append(model.getStudentId()).append("/matchList.html\" target=\"_blank\">点击跳转</a>").append("</td>");
                 sb.append("<td>").append(model.getMatchListData().multiply(new BigDecimal("100")).doubleValue()).append("%</td>");
                 sb.append("<td>").append(model.getMatchListEvent().intValue() == 1 ? "有" : "无").append("</td>");
@@ -91,7 +91,7 @@ public class StudentJobServiceImplTest {
                 sb.append("<td>-</td><td>-</td><td>-</td>");
             }
 
-            if(StringUtils.isNotEmpty(model.getMatchDetailMd5())) {
+            if (StringUtils.isNotEmpty(model.getMatchDetailMd5())) {
                 sb.append("<td>").append("<a href=\"/").append(model.getStudentId()).append("/matchDetail.html?mid=1135445\" target=\"_blank\">点击跳转</a>").append("</td>");
                 sb.append("<td>").append(model.getMatchDetailData().multiply(new BigDecimal("100")).doubleValue()).append("%</td>");
             } else {
@@ -102,14 +102,13 @@ public class StudentJobServiceImplTest {
         System.out.println(sb.toString());
     }
 
-        @Test
+    @Test
     public void doCheck() {
 
         System.setProperty("webdriver.chrome.driver", "D:\\github-workspace\\InformationDemo\\documents/chromedriver2.45.exe");//chromedriver服务地址
         WebDriver driver = new ChromeDriver(); //新建一个WebDriver 的对象，但是new 的是FirefoxDriver的驱动
 
         try {
-
 
 
             List<StudentJobEntity> list = studentJobService.getList();
